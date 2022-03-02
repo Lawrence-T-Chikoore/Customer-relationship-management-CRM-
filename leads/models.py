@@ -19,7 +19,7 @@ def my_year_validator(value):
 class Lead(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
-    age = models.IntegerField(null = True,blank=True,validators=[my_year_validator])
+    age = models.IntegerField(default=0)
     agent = models.ForeignKey("Agent",on_delete=models.CASCADE)
 
     def __str__(self):

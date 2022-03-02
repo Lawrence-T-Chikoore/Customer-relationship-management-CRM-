@@ -35,17 +35,11 @@ def lead_create(request):
 
 def lead_update(request, pk):
     lead = Lead.objects.get(id=pk)
-    form = LeadForm()
+    form = LeadModelForm(instance=lead)
     if request.method == "POST":
+        form = LeadModelForm(request.POST, instance=lead)
         if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            age = form.cleaned_data['age']
-            print(age)
-            lead.first_name = first_name
-            lead.last_name = last_name
-            lead.age = age
-            lead.save()
+            form.save()
             return redirect("/leads")
     context = {
         "form": form,
@@ -53,6 +47,11 @@ def lead_update(request, pk):
     }
     return render(request, "leads/lead_update.html",context)
 
+
+def lead_delete(request,pk):
+    lead = Lead.objects.get(id=pk)
+    lead.delete()
+    return redirect("/leads")
 
 # def lead_create(request):
 #     form = LeadModelForm()
