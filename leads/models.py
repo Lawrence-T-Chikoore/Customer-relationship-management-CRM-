@@ -1,9 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
     pass
+
+
+def my_year_validator(value):
+    if value < 0:
+        raise ValidationError(
+            _('%(value)s is not an even number'),
+            params={'value': value},
+        )
 
 
 class Lead(models.Model):
