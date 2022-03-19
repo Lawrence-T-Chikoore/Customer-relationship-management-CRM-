@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-
-</head>
-<body>
-<a href="/leads">Go back to leas</a>
+{% extends "base.html"%}
+{% block content %}
+<a href="{% url 'leads:lead-detail' lead.pk %}">Go back to leas</a>
 <hr>
 <h1>Update lead: {{ lead.first_name }}  {{ lead.last_name }}</h1>
 <p>This persona age{{ lead.age }}</p>
@@ -15,6 +9,4 @@
     {{ form.as_p }}
     <button type="submit">Submit</button>
 </form>
-
-</body>
-</html>
+{% endblock content %}
